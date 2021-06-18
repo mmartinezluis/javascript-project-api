@@ -3,7 +3,7 @@ class AuthorsController < ApplicationController
   
     # GET /authors
     def index
-      authors = Author.all
+      authors = Author.all.limit(5)
   
     #    render json: authors
       render json: AuthorBlueprint.render(authors)
