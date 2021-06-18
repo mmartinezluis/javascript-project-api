@@ -3,14 +3,18 @@ class AuthorsController < ApplicationController
   
     # GET /authors
     def index
-      @authors = Author.all
+      authors = Author.all
   
-      render json: @authors
+    #    render json: authors
+      render json: AuthorBlueprint.render(authors)
     end
   
     # GET /authors/1
     def show
-      render json: @author
+    #   render json: @author
+    
+    #   author = Author.find(params[:id])
+      render json: AuthorBlueprint.render(@author)
     end
   
     # POST /authors
