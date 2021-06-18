@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# Author.destroy_all
-# Category.destroy_all
+Author.destroy_all
+Category.destroy_all
 
 AUTHORS = Scraper.authors               # A total of 448 authors
 CATEGORIES = Scraper.categories         # A total of 10 categories
@@ -21,7 +21,7 @@ end
 
 def create_categories
   CATEGORIES.each do |category|
-    Category.new(name: category[:name])
+    Category.create(name: category[:name])
   end
 end
 
@@ -44,19 +44,20 @@ def populate_categories
   end
 end
 
-# EXERT CAUTION: STEP_ONE WILL CREATE 448 AUTHORS AND 22926 QUOTES!!! CAN TAKE > 7 MINUTES TO RUN
+# EXERT CAUTION: STEP_ONE WILL CREATE 448 AUTHORS AND 22,926 QUOTES!!! CAN TAKE > 7 MINUTES TO RUN
 def step_one
   create_authors
   populate_authors
 end
 
+# STEP TWO WILL ADD AN ADDITIONAL 23,258 - 22,926 = 332 quotes, and an additional 757 - 448 = 309 authors; STEP two takes less than 3 minutes
 def step_two
   create_categories
   populate_categories
 end
 
 
-# step_one
+step_one
 step_two
 
 
