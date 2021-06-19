@@ -1,2 +1,56 @@
 class StoriesController < ApplicationController
-end
+    before_action :set_story, only: [:show, :update, :destroy]
+  
+   
+    def index
+      stories = Story.all
+
+    #    render json: stories
+      render json: StoryBlueprint.render(stories, view: :normal)
+    end
+  
+   
+    def show
+    #   render json: @story
+    
+    #   author = Author.find(params[:id])
+      render json: StoryBlueprint.render(@story)
+    end
+  
+   
+    def create
+      @story = Story.new(story_params)
+
+       if @story.save
+        # render json: @story, status: :created, location: @story
+        render json: StoryBlueprint.render(@story)
+      else
+        render json: @story.errors, status: :unprocessable_entity
+      end
+    end
+  
+   
+    def update
+      if @story.update(story_params)
+        render json: @story
+      else
+        render json: @story.errors, status: :unprocessable_entity
+      end
+    end
+  
+ 
+    def destroy
+      @story.destroy
+    end
+  
+    private
+   
+      def set_story
+        @story = Story.find(params[:id])
+      end
+  
+      def story_params
+        params.require(:story).permit(:description, :user_id, :quote_id)
+      end
+  end
+  

@@ -1,7 +1,6 @@
 class AuthorsController < ApplicationController
     before_action :set_author, only: [:show, :update, :destroy]
   
-    # GET /authors
     def index
       authors = Author.all.limit(5)
   
@@ -9,7 +8,7 @@ class AuthorsController < ApplicationController
       render json: AuthorBlueprint.render(authors)
     end
   
-    # GET /authors/1
+  
     def show
     #   render json: @author
     
@@ -17,7 +16,7 @@ class AuthorsController < ApplicationController
       render json: AuthorBlueprint.render(@author)
     end
   
-    # POST /authors
+ 
     def create
       @author = Author.new(author_params)
   
@@ -28,7 +27,7 @@ class AuthorsController < ApplicationController
       end
     end
   
-    # PATCH/PUT /authors/1
+  
     def update
       if @author.update(author_params)
         render json: @author
@@ -37,7 +36,7 @@ class AuthorsController < ApplicationController
       end
     end
   
-    # DELETE /authors/1
+  
     def destroy
       @author.destroy
     end

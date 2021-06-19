@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_114953) do
+ActiveRecord::Schema.define(version: 2021_06_19_131601) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_114953) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quote_id"
     t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
