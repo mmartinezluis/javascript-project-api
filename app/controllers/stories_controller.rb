@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
       stories = Story.all
 
     #    render json: stories
-      render json: StoryBlueprint.render(stories, view: :normal)
+      render json: StoryBlueprint.render(stories)
     end
   
    
@@ -19,13 +19,13 @@ class StoriesController < ApplicationController
   
    
     def create
-      @story = Story.new(story_params)
+      story = Story.new(story_params)
 
-       if @story.save
+       if story.save
         # render json: @story, status: :created, location: @story
-        render json: StoryBlueprint.render(@story)
+        render json: StoryBlueprint.render(story, view: :normal)
       else
-        render json: @story.errors, status: :unprocessable_entity
+        render json: story.errors, status: :unprocessable_entity
       end
     end
   
@@ -41,6 +41,7 @@ class StoriesController < ApplicationController
  
     def destroy
       @story.destroy
+      render json: {message: "Story ##{@story.id} successfully deleted"}
     end
   
     private
