@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
       stories = Story.all
 
     #    render json: stories
-      render json: StoryBlueprint.render(stories)
+      render json: StoryBlueprint.render(stories, view: :normal)
     end
   
    
@@ -32,7 +32,7 @@ class StoriesController < ApplicationController
    
     def update
       if @story.update(story_params)
-        render json: @story
+        render json: StoryBlueprint.render(@story, view: :normal)
       else
         render json: @story.errors, status: :unprocessable_entity
       end
