@@ -20,12 +20,11 @@ class StoriesController < ApplicationController
    
     def create
       story = Story.new(story_params)
-
        if story.save
         # render json: @story, status: :created, location: @story
         render json: StoryBlueprint.render(story, view: :normal)
       else
-        render json: story.errors, status: :unprocessable_entity
+        render json: story.errors#, status: :unprocessable_entity
       end
     end
   
