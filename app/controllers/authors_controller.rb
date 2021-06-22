@@ -13,7 +13,7 @@ class AuthorsController < ApplicationController
     #   render json: @author
     
     #   author = Author.find(params[:id])
-      render json: AuthorBlueprint.render(@author)
+      render json: AuthorBlueprint.render(@author, view: :normal)
     end
   
  
