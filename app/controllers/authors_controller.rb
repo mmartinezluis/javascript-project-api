@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
     before_action :set_author, only: [:show, :update, :destroy]
   
     def index
-      authors = Author.all.limit(5)
+      authors = Author.all.sample(10)
   
     #    render json: authors
       render json: AuthorBlueprint.render(authors)
