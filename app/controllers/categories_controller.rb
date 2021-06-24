@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     category = Category.find_by(id: params[:id])
     if category
     #   render json: CategoryBlueprint.render(category, view: :normal)
-      render json: category.quotes.sample
+      render json: QuoteBlueprint.render(category.quotes.sample)
     else
       render json: category.errors
     end

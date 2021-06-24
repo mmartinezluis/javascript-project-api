@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
     before_action :set_author, only: [:show, :update, :destroy]
   
     def index
-      authors = Author.all.sample(10)
+      authors = Author.all
   
     #    render json: authors
       render json: AuthorBlueprint.render(authors)
@@ -14,7 +14,7 @@ class AuthorsController < ApplicationController
     
     #   author = Author.find(params[:id])
     #   render json: AuthorBlueprint.render(@author, view: :normal)
-      render json: @author.quotes.sample
+      render json: QuoteBlueprint.render(@author.quotes.sample)
     end
   
  
