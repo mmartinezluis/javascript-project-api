@@ -1,24 +1,9 @@
-# README
+# StuoQuotes API
+This is the RESTful Ruby on Rails API server for the StoQuotes app [frontend](https://github.com/mmartinezluis/stoquotes-frontend) repository. StoQuotes is an app that allows users to get quotes from a rich variety of methods, and write stories that may relate to those quotes.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Functionality
+This API is designed following the . The API uses the [BluePrinter serialzer](https://github.com/procore/blueprinter) for easily rendering models associations in json format. The database for the API is retreived from [BrainyQuotes.com](https://www.brainyquote.com). You may follow the directions provided in the frontend repo for installing this API in your local machine. 
 
-Things you may want to cover:
+## License
+StoQuotes API is available as open source under the terms of the [MIT License](https://github.com/mmartinezluis/hotel-booking/blob/main/LICENCE.txt). 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
