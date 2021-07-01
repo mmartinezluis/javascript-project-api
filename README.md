@@ -5,5 +5,5 @@ This is the RESTful Ruby on Rails API server for the StoQuotes app [frontend](ht
 This API is designed following the . The API uses the [BluePrinter serialzer](https://github.com/procore/blueprinter) for easily rendering models associations in json format. The database for the API is retreived from [BrainyQuotes.com](https://www.brainyquote.com). You may follow the directions provided in the frontend repo for installing this API in your local machine. 
 
 ## License
-StoQuotes API is available as open source under the terms of the [MIT License](https://github.com/mmartinezluis/hotel-booking/blob/main/LICENCE.txt). 
+StoQuotes API is available as open source under the terms of the [MIT License](https://github.com/mmartinezluis/stoquotes-backend/blob/main/LICENCE.txt). 
 
