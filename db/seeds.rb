@@ -56,18 +56,8 @@ def step_two
   populate_categories
 end
 
-
 step_one
 step_two
 
 
-# link = "https://www.brainyquote.com/authors/abraham-maslow-quotes"
-# link = "https://www.brainyquote.com/topics/love-quotes"
-#  get_quotes_category("https://www.brainyquote.com/topics/love-quotes")
-#  first = Nokogiri::HTML(open(link))
-#  second = first.css("#quotesList .grid-item") 
-#  third = second.collect do |i|
-#  {:body => i.css("a.b-qt").text, :author => i.css("a.bq-aut").text}                             
-# end
-# fourth = third.uniq
-# fifth = fourth.delete_if { |quote| quote[:body].blank? }
+
