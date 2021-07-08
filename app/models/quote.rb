@@ -4,8 +4,6 @@ class Quote < ApplicationRecord
   has_many :stories
   has_many :users, through: :stories
 
-  # scope :with_stories, -> { where.not("stories = ?", []) }
-
   def author_name=(name)
     self.author.name = name
   end
