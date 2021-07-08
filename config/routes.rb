@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users
-  resources :stories
+  resources :stories, only: [:index, :show, :create, :update, :destroy]
   resources :categories, only: [:index, :show]
   resources :authors, only: [:index, :show]
   resources :quotes, only: [:show]
