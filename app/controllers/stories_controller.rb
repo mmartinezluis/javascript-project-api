@@ -1,56 +1,44 @@
 class StoriesController < ApplicationController
-    before_action :set_story, only: [:show, :update, :destroy]
+  before_action :set_story, only: [:show, :update, :destroy]
   
-   
-    def index
-      stories = Story.all
+  def index
+    stories = Story.all
+    render json: StoryBlueprint.render(stories, view: :normal)
+  end
+  
+  def show
+    render json: StoryBlueprint.render(@story)
+  end
+  
+  def create
+    story = Story.new(story_params)
+      if story.save
+      render json: StoryBlueprint.render(story, view: :normal)
+    else
+      render json: story.errors
+    end
+  end
 
-    #    render json: stories
-      render json: StoryBlueprint.render(stories, view: :normal)
+  def update
+    if @story.update(story_params)
+      render json: StoryBlueprint.render(@story, view: :normal)
+    else
+      render json: @story.errors, status: :unprocessable_entity
     end
-  
-   
-    def show
-    #   render json: @story
-    
-    #   author = Author.find(params[:id])
-      render json: StoryBlueprint.render(@story)
+  end
+
+  def destroy
+    @story.destroy
+    render json: {message: "Story ##{@story.id} successfully deleted"}
+  end
+
+  private
+    def set_story
+      @story = Story.find(params[:id])
     end
-  
-   
-    def create
-      story = Story.new(story_params)
-       if story.save
-        # render json: @story, status: :created, location: @story
-        render json: StoryBlueprint.render(story, view: :normal)
-      else
-        render json: story.errors#, status: :unprocessable_entity
-      end
+
+    def story_params
+      params.require(:story).permit(:description, :user_id, :quote_id)
     end
-  
-   
-    def update
-      if @story.update(story_params)
-        render json: StoryBlueprint.render(@story, view: :normal)
-      else
-        render json: @story.errors, status: :unprocessable_entity
-      end
-    end
-  
- 
-    def destroy
-      @story.destroy
-      render json: {message: "Story ##{@story.id} successfully deleted"}
-    end
-  
-    private
-   
-      def set_story
-        @story = Story.find(params[:id])
-      end
-  
-      def story_params
-        params.require(:story).permit(:description, :user_id, :quote_id)
-      end
   end
   
