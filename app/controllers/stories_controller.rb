@@ -15,7 +15,7 @@ class StoriesController < ApplicationController
       if story.save
       render json: StoryBlueprint.render(story, view: :normal)
     else
-      render json: story.errors
+      render json: @story.errors
     end
   end
 
