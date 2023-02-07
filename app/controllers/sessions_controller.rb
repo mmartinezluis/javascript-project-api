@@ -10,8 +10,13 @@ class SessionsController < ApplicationController
         end
     end
 
-    def logout
+    def signup
+        user = User.new(session_params)
+        if(user.save)
+            
+        else
 
+        end
     end
 
     private
