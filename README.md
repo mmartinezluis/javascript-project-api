@@ -1,4 +1,4 @@
-# StuoQuotes API
+# StoQuotes API
 This is the RESTful Ruby on Rails API server for the StoQuotes app [frontend](https://github.com/mmartinezluis/stoquotes-frontend) repository. StoQuotes is an app that allows users to get quotes from a rich variety of methods, and write stories that may relate to those quotes.
 
 ## Functionality

@@ -1,6 +1,7 @@
 module UserManager
     class FirebaseAuth < ApplicationService
         def self.generate_token(user)
+            # byebug
             service_account_email = ENV["FIREBASE_SERVICE_ACCOUNT_EMAIL"]
             private_key = OpenSSL::PKey::RSA.new ENV["FIREBASE_PRIVATE_KEY"]
               
@@ -12,10 +13,8 @@ module UserManager
               iat: now_seconds,
               exp: now_seconds + (60*60), # Maximum expiration time is one hour
               uid: user.id,
-              # a hash to pass to the client as JSON
             }
-            byebug
-            # JWT.encode payload, private_key, "RS256"
+            JWT.encode payload, private_key, "RS256"
         end
     end
 end
