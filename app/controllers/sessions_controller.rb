@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
         user = User.find_by(email: session_params[:email])
         if(user && user.authenticate(session_params[:password]))
             token = UserManager::FirebaseAuth.generate_token(user)
-            render json: {token: token}
+            render json: {token: token, user: user}
         else 
             render json: {message: "Invalid email or password"}, status: :not_acceptable
         end
@@ -13,9 +13,10 @@ class SessionsController < ApplicationController
     def signup
         user = User.new(session_params)
         if(user.save)
-            
+            token = UserManager::FirebaseAuth.generate_token(user)
+            render json: {token: token, user: user}
         else
-
+            render json: { message: user.errors.full_messages.join("; ")}, status: :not_acceptable
         end
     end
 
