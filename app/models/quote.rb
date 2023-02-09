@@ -4,13 +4,13 @@ class Quote < ApplicationRecord
   has_many :stories
   has_many :users, through: :stories
 
-  def author_name=(name)
-    self.author.name = name
-  end
+  # def author_name=(name)
+  #   self.author.name = name
+  # end
 
-  def author_name
-    self.author ? self.author.name : nil
-  end
+  # def author_name
+  #   self.author ? self.author.name : nil
+  # end
 
   def category_name=(name)
     self.category.name = name
