@@ -4,5 +4,6 @@ class UserBlueprint < Blueprinter::Base
 
     view :profile do
         fields :email
+        association :stories, blueprint: StoryBlueprint, view: :normal
     end
 end
