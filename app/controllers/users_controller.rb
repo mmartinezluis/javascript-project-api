@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
 
     def profile
-        user = User.find_by(id: user_params[:id])
+        user = User.includes(stories: [:quote]).find_by(id: 1)
         if user
-            render json: UserBlueprint.rneder(user, view: :profile)
+            render json: UserBlueprint.render(user, view: :profile)
         else
             render json: {message: "User not found"}, status: :not_found
         end
