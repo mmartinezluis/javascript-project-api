@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
 
     def signup
         user = User.new(session_params)
+        # Make a post request to create user in DynamoDB
         if(user.save)
             token = UserManager::FirebaseAuth.generate_token(user)
             render json: {token: token, user: UserBlueprint.render(user, view: :profile)}
