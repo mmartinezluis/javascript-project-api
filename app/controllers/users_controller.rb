@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
 
     def profile
-        user = User.includes(stories: [:quote]).find_by(id: 1)
+        # @TODO: Move the quotes to a caching database
+        # so that the main database does not need to be queried
+        # for quotes as quotes are static data
+        user = User.includes(stories: [:quote]).find_by(id: user_params[:id])
         if user
             render json: UserBlueprint.render(user, view: :profile)
         else

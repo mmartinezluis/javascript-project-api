@@ -1,11 +1,9 @@
 class SessionsController < ApplicationController
 
     def login
-        # byebug
-        user = User.find_by(email: session_params[:email])
+        user = User.includes(stories: [:quote]).find_by(email: session_params[:email])
         if(user && user.authenticate(session_params[:password]))
             token = UserManager::FirebaseAuth.generate_token(user)
-            # byebug
             render json: {token: token, user: UserBlueprint.render(user, view: :profile)}
         else 
             render json: {message: "Invalid email or password"}, status: :not_acceptable
