@@ -12,9 +12,12 @@ class SessionsController < ApplicationController
 
     def signup
         user = User.new(session_params)
-        # Make a post request to create user in DynamoDB
         if(user.save)
             token = UserManager::FirebaseAuth.generate_token(user)
+            dynamodb_response = FaradayClient.new.create_dynamodb_user(user.id)
+            if !dynamodb_response.success?
+                # @TODO: send request to a background worker for a retry
+            end
             render json: {token: token, user: UserBlueprint.render(user, view: :profile)}
         else
             render json: { message: user.errors.full_messages.join("; ")}, status: :not_acceptable

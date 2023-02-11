@@ -6,4 +6,12 @@ class FaradayClient
             headers: {'Content-type': 'application/json'},
         )
     end
+
+    def create_dynamodb_user(id)
+        @conn.post("") do |req|
+            req.body = {
+                user_id: id
+            }.to_json
+        end
+    end
 end
