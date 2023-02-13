@@ -20,9 +20,7 @@ class StoriesController < ApplicationController
   end
 
   def update
-    if !@story  
-      # render json: "Story not found", status: 404
-    elsif @story.id != story_params[:user_id]
+    if @story.user_id != story_params[:user_id]
       render json: "Your are trying to update another user's story", status: :not_acceptable
     elsif @story.update(story_params)
       render json: StoryBlueprint.render(@story, view: :normal), status: 200
@@ -32,8 +30,10 @@ class StoriesController < ApplicationController
   end
 
   def destroy
-    if @story.destroy
-      render json: {message: "Story ##{@story.id} successfully deleted"}
+    if @story.user_id.to_s != params[:user_id]
+      render json: "Your are trying to delete another user's story", status: :not_acceptable
+    elsif @story.destroy
+      render :nothing => true, status: :no_content
     else 
       render json: @story.errors.full_messages, status: :unprocessable_entity
     end
