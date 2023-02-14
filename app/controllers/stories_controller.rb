@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :update, :destroy]
   
   def index
-    stories = Story.includes(:quote).all
+    stories = Story.includes(:quote).last 20
     render json: StoryBlueprint.render(stories, view: :normal)
   end
   
@@ -13,7 +13,7 @@ class StoriesController < ApplicationController
   def create
     story = Story.new(story_params)
     if story.save
-      render json: StoryBlueprint.render(story, view: :normal), status: 200
+      render json: StoryBlueprint.render(story, view: :normal), status: :created
     else
       render json: story.errors.full_messages.join("; "), status: :not_acceptable
     end
@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
     if @story.user_id != story_params[:user_id]
       render json: "Your are trying to update another user's story", status: :not_acceptable
     elsif @story.update(story_params)
-      render json: StoryBlueprint.render(@story, view: :normal), status: 200
+      render json: StoryBlueprint.render(@story, view: :normal), status: :ok
     else
       render json: @story.errors.full_messages, status: :unprocessable_entity
     end

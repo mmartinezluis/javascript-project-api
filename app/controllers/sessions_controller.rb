@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
             token = UserManager::FirebaseAuth.generate_token(user)
             render json: {token: token, user: UserBlueprint.render(user, view: :profile)}
         else 
-            render json: {message: "Invalid email or password"}, status: :not_acceptable
+            render json: "Invalid email or password", status: :not_acceptable
         end
     end
 
@@ -18,9 +18,9 @@ class SessionsController < ApplicationController
             if !dynamodb_response.success?
                 # @TODO: send request to a background worker for a retry
             end
-            render json: {token: token, user: UserBlueprint.render(user, view: :profile)}
+            render json: {token: token, user: UserBlueprint.render(user, view: :profile)}, status: :created
         else
-            render json: { message: user.errors.full_messages.join("; ")}, status: :not_acceptable
+            render json: user.errors.full_messages.join("; "), status: :not_acceptable
         end
     end
 
