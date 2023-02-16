@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   post '/login', to: 'sessions#login'
   post '/signup', to: 'sessions#signup'
-  post "/profile", to: "users#profile"
+
+  get "/profile/:id", to: "users#profile"
+  post '/feed', to: "users#feed"
 
 end

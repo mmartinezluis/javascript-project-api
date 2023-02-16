@@ -5,4 +5,9 @@ class StoryBlueprint < Blueprinter::Base
   view :normal do 
     association :quote, blueprint: QuoteBlueprint
   end
+
+  view :feed do 
+    association :user, blueprint: UserBlueprint
+    association :quote, blueprint: QuoteBlueprint
+  end
 end
