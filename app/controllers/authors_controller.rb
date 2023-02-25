@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_action :set_author, only: [:show, :update, :destroy]
+  before_action :set_author, only: [:show]
   
   def index
     authors = Author.all
@@ -7,16 +7,20 @@ class AuthorsController < ApplicationController
   end
 
   def show
-    render json: QuoteBlueprint.render(@author.quotes.sample)
+    if author
+      render json: QuoteBlueprint.render(author.quotes.sample)
+    else
+      render json: "Author not found", status: :not_found
+    end
   end
 
   private
     def set_author
-      @author = Author.find(params[:id])
+      author = Author.find_by(id: author_params[:author_id])
     end
 
     def author_params
-      params.require(:author).permit(:name)
+      params.require(:author).permit(:name, :author_id)
     end
   end
   

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
     def feed
         stories = Story.includes(:user, :quote).find_by(id: user_params[:story_ids])
+        # stories = Story.includes(:user, :quote).find_by(id: [336, 334])
         stories = [] if !stories
         render json: StoryBlueprint.render(stories, view: :feed)
     end

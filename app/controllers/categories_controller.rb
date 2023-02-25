@@ -6,11 +6,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    category = Category.find_by(id: params[:id])
+    category = Category.find_by(id: params[:category_id])
     if category
       render json: QuoteBlueprint.render(category.quotes.sample)
     else
-      render json: category.errors
+      render json: "Category not found", status: :not_found
     end
   end
 
