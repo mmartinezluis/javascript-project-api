@@ -7,8 +7,8 @@ class AuthorsController < ApplicationController
   end
 
   def show
-    if author
-      render json: QuoteBlueprint.render(author.quotes.sample)
+    if @author
+      render json: QuoteBlueprint.render(@author.quotes.sample)
     else
       render json: "Author not found", status: :not_found
     end
@@ -16,11 +16,11 @@ class AuthorsController < ApplicationController
 
   private
     def set_author
-      author = Author.find_by(id: author_params[:author_id])
+      @author = Author.find_by(id: author_params[:author_id])
     end
 
     def author_params
-      params.require(:author).permit(:name, :author_id)
+      params.permit(:author_id)
     end
   end
   
