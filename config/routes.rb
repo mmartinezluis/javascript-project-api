@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   get '/:author_id/randomquote', to: 'authors#show'
-  get '/:category_id/randomquote', to: 'categories#show'
+  get '/:category_id/categoryquote', to: 'categories#show'
   get '/:author_id/quote', to: 'quotes#show'
 
   post '/login', to: 'sessions#login'

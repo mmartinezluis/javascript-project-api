@@ -11,6 +11,10 @@ class StoriesController < ApplicationController
   end
   
   def create
+    user = User.find_by(id: story_params[:user_id])
+    render json: "User must exist", status: :not_acceptable and return if !user
+    quote = user.stories.find_by(quote_id: story_params[:quote_id])
+    render json: "You already have a story for this quote!", status: :not_acceptable and return if quote
     story = Story.new(story_params)
     if story.save
       render json: StoryBlueprint.render(story, view: :normal), status: :created
